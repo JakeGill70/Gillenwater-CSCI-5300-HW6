@@ -9,7 +9,7 @@ var problem1 = {
     getLucasNumber : function(index, maxTime){
         let start = Date.now();
         let max = Date.now() + (maxTime * 1000); // Convert maxTime from seconds to ms
-        return this._getLucasNumber(index, start, max);
+        return problem1._getLucasNumber(index, start, max);
     },
 
     // Recursive determines the number at the specied index within the lucas series
