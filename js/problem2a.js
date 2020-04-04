@@ -7,17 +7,10 @@
 var problem2a = { 
 
     startTime : 0,
-    maxTime : 0,
+    endTime : 0,
 
     // Public interface to simplify calling the method
     getLucasNumber : function(index, maxTime){
-        this.startTime = Date.now();
-        this.maxTime = Date.now() + (maxTime * 1000); // Convert maxTime from seconds to ms
-        return problem2a._getLucasNumber(index);
-    },
-
-    // Recursive determines the number at the specied index within the lucas series
-    _getLucasNumber : function(index){
 
         // Error checking for negative index
         if(index < 0){
@@ -27,8 +20,18 @@ var problem2a = {
         if(maxTime < 0){
             throw("Exception: negative maxTime");
         }
+
+        startTime = Date.now();
+        endTime = Date.now() + (maxTime * 1000); // Convert maxTime from seconds to ms
+        return problem2a._getLucasNumber(index);
+    },
+
+    // Recursive determines the number at the specied index within the lucas series
+    _getLucasNumber : function(index){
+
+        
         // Error checking for timeout
-        if(this.maxTime - this.startTime <= 0){
+        if(endTime - Date.now() <= 0){
             throw("Exception: maxTime exceeded");
         }
 
@@ -45,8 +48,8 @@ var problem2a = {
             valueAtIndex = 1;
         }
         else {
-            let gln1 = this._getLucasNumber(index-1, Date.now(), maxTime); // Get the previous number in the lucas series
-            let gln2 = this._getLucasNumber(index-2, Date.now(), maxTime); // Get the previous previous number in the lucas series
+            let gln1 = _getLucasNumber(index-1); // Get the previous number in the lucas series
+            let gln2 = _getLucasNumber(index-2); // Get the previous previous number in the lucas series
             valueAtIndex = gln1[0] + gln2[0]; // Determine the value at this index
             timesCalled += gln1[1] + gln2[1]; // Add up the number of times this method was called
         }
