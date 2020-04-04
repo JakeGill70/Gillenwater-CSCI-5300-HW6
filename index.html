@@ -12,7 +12,9 @@
     <!-- My custom CSS-->
     <style>
         body {
-            padding-top: 120px; /* Magic number = navbar.height + navbar.padding + navbar.border + 5 extra */
+            /* Magic number of 130 = navbar.height + navbar.padding + navbar.border + 15 extra */
+            padding-top: 130px;
+            padding-bottom: 130px;
         }
 
         .navbar {
@@ -40,54 +42,84 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <script src="js/problem1.js"></script>
+    <script src="js/problem2a.js"></script>
+
 
     <script>
         // Driver script
         $(document).ready(function(){
 
             $("#problem1-calculate").click(function(){
-                // Prepare output
-                let index = $("#problem1-index").val();
-                let maxTime = $("#problem1-maxTime").val();
-
-                // Attempt to get the lucas number at the specified index within the specified time
-                let result;
-                try {
-                    let startTime = Date.now();
-                    let answer = problem1.getLucasNumber(index, maxTime);
-                    let endTime = Date.now()
-                    result = "lucas " + index + " is " + answer[0] + " - computed with " + answer[1];
-                    result += answer[1] == 1 ? " call " : " calls ";
-                    result += "in " + (endTime - startTime)/1000 + " seconds";
-                } catch (error) {
-                    result = error;
-                }
-                result = wrapTextInListItem(result);
-
-                // Append to output
-                $("#problem1-output-list").append(result);
-
-                // Automatically scroll output to bottom
-                let moduleWindow = document.getElementById("problem1-output");
-                moduleWindow.scrollTo(0, moduleWindow.scrollHeight);
-
-                // Auto-Increment the index
-                let isAutoIncrementEnabled = $("#problem1-autoIncrement").is(":checked");
-                if(isAutoIncrementEnabled){
-                    $("#problem1-index").val( parseInt(index)+1 );
-                }
+                problemDriver("problem1")
             });
 
-            function wrapTextInListItem(text){
-                return "<li class=\"list-group-item\">" + text + "</li>";
-            }
+            $("#problem2a-calculate").click(function(){
+                problemDriver("problem2a")
+            });
+
+            
         });
+
+        
+        // Accepts form input, calls the appropriate problem function, then writes the output to the page
+        // WARNING: Requires that the HTML element IDs to be setup very carefully
+        function problemDriver(problemName){
+            // Dispatch table mapping problem names to their respective implementation of the lucas series
+            let problemFunctions = {
+                "problem1" : problem1.getLucasNumber,
+                "problem2a": problem2a.getLucasNumber
+            }
+
+            // Check to make sure the problem exists
+            let doesProblemExists = problemName in problemFunctions;
+            if(!doesProblemExists){
+                throw("Exception: No implementation exists for " + problemName);
+            }
+
+            // Prepare output
+            let index = $("#" + problemName + "-index").val();
+            let maxTime = $("#" + problemName + "-maxTime").val();
+
+            // Attempt to get the lucas number at the specified index within the specified time
+            let result;
+            try {
+                let startTime = Date.now();
+                let answer = problemFunctions[problemName](index, maxTime);
+                let endTime = Date.now();
+                result = "lucas " + index + " is " + answer[0] + " - computed with " + answer[1];
+                result += answer[1] == 1 ? " call " : " calls ";
+                result += "in " + (endTime - startTime)/1000 + " seconds";
+            } catch (error) {
+                result = error;
+            }
+
+            // Wrap the result in the proper HTML tags
+            result = wrapTextInListItem(result);
+
+            // Append to output
+            $("#" + problemName + "-output-list").append(result);
+
+            // Automatically scroll output to bottom
+            let moduleWindow = document.getElementById(problemName + "-output");
+            moduleWindow.scrollTo(0, moduleWindow.scrollHeight);
+
+            // Auto-Increment the index
+            let isAutoIncrementEnabled = $("#" + problemName + "-autoIncrement").is(":checked");
+            if(isAutoIncrementEnabled){
+                $("#" + problemName + "-index").val( parseInt(index)+1 );
+            }
+        }
+
+        // Wraps some object in a <li> tag
+        function wrapTextInListItem(text){
+            return "<li class=\"list-group-item\">" + text + "</li>";
+        }
         
     </script>
   </head>
   <body>
 
-    <nav class="navbar navbar-expand-sm fixed-top">
+    <nav class="navbar navbar-expand-sm fixed-top bg-light">
         <div class="navbar-header">
             <h1>CSCI-5300 - Software Design - HW6</h1>
             <h2>Jake Gillenwater</h2>
@@ -120,6 +152,40 @@
                     <label>Max Run Time: </label> <input class="form-control-number" id="problem1-maxTime" type="number" placeholder="Seconds">
                     <button class="btn btn-secondary mb-2" id="problem1-calculate">Calculate</button><br>
                     <label>Auto-Increment Index: </label> <input class="form-control-checkbox" id="problem1-autoIncrement" type="checkbox" placeholder="Seconds">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <br>
+    <hr>
+    <br>
+
+    <div class="container">
+        <h2>Problem 2a</h2>
+
+        <p>Code:</p>
+        <div class="container">
+            <iframe class="module" src="js/problem2a.js" width="100%"></iframe>
+        </div>
+
+        <p>Output: </p>
+        <div class="container">
+            <div class="module overflow-auto" id="problem2a-output" width="100%">
+                <ul class="list-group" id="problem1-output-list">
+
+                </ul>
+            </div>
+        </div>
+
+        <p>Input: </p>
+        <div class="container">
+            <div class="module">
+                <div class="form-group mx-sm-3 mb-2" style="margin: 16px;">
+                    <label>Index: </label> <input class="form-control-number" id="problem2a-index" type="number" placeholder="Starting at index 0">
+                    <label>Max Run Time: </label> <input class="form-control-number" id="problem2a-maxTime" type="number" placeholder="Seconds">
+                    <button class="btn btn-secondary mb-2" id="problem2a-calculate">Calculate</button><br>
+                    <label>Auto-Increment Index: </label> <input class="form-control-checkbox" id="problem2a-autoIncrement" type="checkbox" placeholder="Seconds">
                 </div>
             </div>
         </div>
