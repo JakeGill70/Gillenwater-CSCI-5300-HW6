@@ -4,7 +4,8 @@ $(document).ready(function(){
 
         let lucasSeriesImplementation = {
             "problem1" : problem1.getLucasNumber,
-            "problem2a" : problem2a.getLucasNumber
+            "problem2a" : problem2a.getLucasNumber,
+            "problem2b" : problem2b.getLucasNumber
         }
 
         let userInput = presenter.getUserInput(problemName); // Get the user input from the form
