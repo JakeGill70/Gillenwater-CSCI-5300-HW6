@@ -43,7 +43,7 @@
 
     <script src="js/problem1.js"></script>
     <script src="js/problem2a.js"></script>
-
+    <script src="js/problem2b.js"></script>
 
     <script>
         // Driver script
@@ -57,6 +57,10 @@
                 problemDriver("problem2a")
             });
 
+
+            $("#problem2b-calculate").click(function(){
+                problemDriver("problem2b")
+            });
             
         });
 
@@ -67,7 +71,8 @@
             // Dispatch table mapping problem names to their respective implementation of the lucas series
             let problemFunctions = {
                 "problem1" : problem1.getLucasNumber,
-                "problem2a": problem2a.getLucasNumber
+                "problem2a": problem2a.getLucasNumber,
+                "problem2b": problem2b.getLucasNumber
             }
 
             // Check to make sure the problem exists
