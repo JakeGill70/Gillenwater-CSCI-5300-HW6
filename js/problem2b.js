@@ -64,7 +64,7 @@ var problem2b = {
         if(problem2b._endTime < 0){
             throw("negative endTime");
         }
-        console.log(this);
+        
         return computeLucasNumber(this, index);
     }
 }
