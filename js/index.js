@@ -1,7 +1,12 @@
 $(document).ready(function(){
 
-    $("#problem1-calculate").click(function(){
-        let problemName = "problem1"; // Set the problem name; used for interaction with the UI
+    function problemDriver(problemName){
+
+        let lucasSeriesImplementation = {
+            "problem1" : problem1.getLucasNumber,
+            "problem2a" : problem2a.getLucasNumber
+        }
+
         let userInput = presenter.getUserInput(problemName); // Get the user input from the form
         let startTime = Date.now(); // Set the official starting time of the method
 
@@ -9,7 +14,7 @@ $(document).ready(function(){
         for (let i = 0; i <= userInput.index; i++) {
             try {
                 let outputStartTime = Date.now(); // Set the start time of this index's run
-                let answer = problem1.getLucasNumber(i, startTime, userInput.maxTime); // Get the runtime 
+                let answer = lucasSeriesImplementation[problemName](i, startTime, userInput.maxTime); // Get the runtime 
                 let outputRunTime = (Date.now() - outputStartTime)/1000; // Determine how long it took to calculate this index
                 // Write out normal output
                 output = `lucas ${i} is ${answer[0]} - computed with ${answer[1]} ${answer[1] == 1 ? " call " : " calls "} in ${outputRunTime} seconds`;
@@ -24,15 +29,19 @@ $(document).ready(function(){
                 break;
             }
         }
+    }
+
+    $("#problem1-calculate").click(function(){
+        problemDriver("problem1");
     });
 
     $("#problem2a-calculate").click(function(){
-        problemDriver("problem2a")
+        problemDriver("problem2a");
     });
 
 
     $("#problem2b-calculate").click(function(){
-        problemDriver("problem2b")
+        problemDriver("problem2b");
     });
     
 });
