@@ -7,7 +7,8 @@ $(document).ready(function(){
         let lucasSeriesImplementation = {
             "problem1" : problem1.getLucasNumber,
             "problem2a" : problem2a.getLucasNumber,
-            "problem2b" : problem2b.getLucasNumber
+            "problem2b" : problem2b.getLucasNumber,
+            "problem3" : problem3.getLucasNumber
         }
 
         // Get the user input from the form
@@ -51,9 +52,12 @@ $(document).ready(function(){
         problemDriver("problem2a");
     });
 
-
     $("#problem2b-calculate").click(function(){
         problemDriver("problem2b");
+    });
+
+    $("#problem3-calculate").click(function(){
+        problemDriver("problem3");
     });
     
 });
