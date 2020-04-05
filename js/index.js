@@ -9,7 +9,7 @@ $(document).ready(function(){
             "problem2a" : problem2a.getLucasNumber,
             "problem2b" : problem2b.getLucasNumber,
             "problem3" : problem3.getLucasNumber,
-            "problem4" : problem3.getLucasNumber
+            "problem4" : problem4.getLucasNumber
         }
 
         // Get the user input from the form
