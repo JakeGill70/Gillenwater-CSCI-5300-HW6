@@ -6,26 +6,28 @@
 // Object that provides a namespace for all of the functions within this file
 var problem1 = { 
     // Public interface to simplify calling the method
-    getLucasNumber : function(index, maxTime){
-        let start = Date.now();
-        let max = Date.now() + (maxTime * 1000); // Convert maxTime from seconds to ms
-        return problem1._getLucasNumber(index, start, max);
+    getLucasNumber : function(index, startTime, maxTime){
+        let start = startTime;
+        let end = startTime + (maxTime * 1000); // Convert maxTime from seconds to ms
+        let result = problem1._getLucasNumber(index, start, end);
+        return result;
     },
 
     // Recursive determines the number at the specied index within the lucas series
+    // The method actual described by problem 1
     _getLucasNumber : function(index, startTime, maxTime){
 
         // Error checking for negative index
         if(index < 0){
-            throw("Exception: negative index");
+            throw("negative index");
         }
         // Error checking for negative maxTime
         if(maxTime < 0){
-            throw("Exception: negative maxTime");
+            throw("negative maxTime");
         }
         // Error checking for timeout
         if(maxTime - startTime <= 0){
-            throw("Exception: maxTime exceeded");
+            throw("timeout");
         }
 
         let valueAtIndex = 0; // Holds the number at the specified index in the lucas series
