@@ -1,7 +1,7 @@
 // Jake Gillenwater
 // 4/3/2020
 // CSCI-5300-201
-// HW6 - Problem 2b
+// HW6 - Problem 3
 
 // Object that provides a namespace for all of the functions within this file
 var problem3 = { 
