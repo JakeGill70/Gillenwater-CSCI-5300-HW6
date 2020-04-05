@@ -8,7 +8,8 @@ $(document).ready(function(){
             "problem1" : problem1.getLucasNumber,
             "problem2a" : problem2a.getLucasNumber,
             "problem2b" : problem2b.getLucasNumber,
-            "problem3" : problem3.getLucasNumber
+            "problem3" : problem3.getLucasNumber,
+            "problem4" : problem3.getLucasNumber
         }
 
         // Get the user input from the form
@@ -58,6 +59,10 @@ $(document).ready(function(){
 
     $("#problem3-calculate").click(function(){
         problemDriver("problem3");
+    });
+
+    $("#problem4-calculate").click(function(){
+        problemDriver("problem4");
     });
     
 });
