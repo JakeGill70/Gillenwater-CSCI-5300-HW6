@@ -1,0 +1,20 @@
+body {
+    /* Magic number of 130 = navbar.height + navbar.padding + navbar.border + 15 extra */
+    padding-top: 130px;
+    padding-bottom: 130px;
+}
+
+.navbar {
+    border: 0px;
+    border-bottom: 5px;
+    border-color: grey;
+    border-style: double;
+}
+
+.module {
+    border: 2px;
+    border-style: ridge;
+    width: 100%;
+    max-height: 200px;
+    min-height: 54px;
+}
