@@ -35,25 +35,33 @@ var problem3 = {
             }
 
             let valueAtIndex = 0; // Holds the number at the specified index in the lucas series
+            let valueBeforeIndex = 0;
             let timesCalled = 1; // Holds the number of times this method was called
 
             // Determine the value at the specified index
             if(i == 0){
                 // Value by definition
                 valueAtIndex = 2;
+                valueBeforeIndex = null;
             }
             else if(i == 1){
                 // Value by definition
                 valueAtIndex = 1;
+                valueBeforeIndex = 2;
+            }
+            else if(i == -1){
+                // i may be -1 on the first call if the user requested the 0th index
+                // Just treat it the same as i==0 because that is what they meant
+                valueAtIndex = 2;
+                valueBeforeIndex = null;
             }
             else {
-                
-                let gln1 = computeLucasNumber(ctx, i-1); // Get the previous number in the lucas series
-                let gln2 = computeLucasNumber(ctx, i-2); // Get the previous previous number in the lucas series
-                valueAtIndex = gln1[0] + gln2[0]; // Determine the value at this index
-                timesCalled += gln1[1] + gln2[1]; // Add up the number of times this method was called
+                let clu = computeLucasNumber(ctx, i-1); // Get the previous number in the lucas series
+                valueAtIndex = clu[0] + clu[1]; // Determine the value at this index
+                valueBeforeIndex = clu[0]; // Set the value at the of the previous index
+                timesCalled += clu[2]; // Add up the number of times this method was called
             }
-            return [valueAtIndex, timesCalled];
+            return [valueAtIndex, valueBeforeIndex, timesCalled];
         }
 
         // Error checking for negative index
@@ -64,7 +72,9 @@ var problem3 = {
         if(problem3._endTime < 0){
             throw("negative endTime");
         }
-        console.log(this);
-        return computeLucasNumber(this, index);
+        let result = computeLucasNumber(this, index-1);
+        let lucasNumber = result[0] + result[1];
+        let numberOfTimesCalled = result[2];
+        return [lucasNumber, numberOfTimesCalled];
     }
 }
