@@ -4,12 +4,21 @@ var presenter = {
         let index = $("#" + problemName + "-index").val();
         let maxTime = $("#" + problemName + "-maxTime").val();
         let isAutoIncrementEnabled = $("#" + problemName + "-autoIncrement").is(":checked");
+        let startIndex = $("#" + problemName + "-startIndex").val();
 
+        // The start index property is only available after problem 3,
+        // so not all implementations will have it.
+        // If they don't have it, just treat it like a 0.
+        if(startIndex == undefined){
+            startIndex = "0";
+        }
+        
         // Package data
         let result = {};
         result.index = parseInt(index);
         result.maxTime = parseInt(maxTime);
         result.isAutoIncrementEnabled = isAutoIncrementEnabled;
+        result.startIndex = parseInt(startIndex);
         return result;
     },
 

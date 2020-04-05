@@ -16,8 +16,8 @@ $(document).ready(function(){
         // Set the official starting time of the method
         let startTime = Date.now(); 
 
-        let output = ""
-        for (let i = 0; i <= userInput.index; i++) {
+        let output = "";
+        for (let i = userInput.startIndex; i <= userInput.index; i++) {
             try {
                 // Set the start time of this index's run
                 let outputStartTime = Date.now(); 
