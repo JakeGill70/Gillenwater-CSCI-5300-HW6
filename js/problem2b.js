@@ -5,8 +5,6 @@
 
 // Object that provides a namespace for all of the functions within this file
 var problem2b = { 
-    _startTime : 0,
-    _endTime : 0,
 
     // Public interface to simplify calling the method
     getLucasNumber : function(index, startTime, maxTime){
@@ -14,23 +12,20 @@ var problem2b = {
         let start = startTime;
         let end = startTime + (maxTime * 1000); // Convert maxTime from seconds to ms
 
-        problem2b._startTime = start;
-        problem2b._endTime = end;
-
-        let result = problem2b._getLucasNumber(index);
+        let result = problem2b._getLucasNumber(index, start, end);
         return result;
     },
 
     // Recursive determines the number at the specied index within the lucas series
     // The method actual described by problem 2b
-    _getLucasNumber : function(index){
+    _getLucasNumber : function(index, startTime, endTime){
 
         // ctx -> The current context in which this function is being called in.
         //      This is necessary because of the contextual nature of the "this" keyword in javascript
         // i -> The index of the number within the lucas series that the method should compute to
         function computeLucasNumber(ctx, i){
             // Error checking for timeout
-            if(problem2b._endTime - Date.now() <= 0){
+            if(endTime - Date.now() <= 0){
                 throw("timeout");
             }
 
@@ -61,10 +56,10 @@ var problem2b = {
             throw("negative index");
         }
         // Error checking for negative maxTime
-        if(problem2b._endTime < 0){
+        if(endTime < 0){
             throw("negative endTime");
         }
-        
+
         return computeLucasNumber(this, index);
     }
 }
