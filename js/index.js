@@ -3,7 +3,7 @@ $(document).ready(function(){
     function problemDriver(problemName){
 
         // Dispatch table for the different problems/implementations 
-        // getting a specific number within the lucas series
+        //      getting a specific number within the lucas series
         let lucasSeriesImplementation = {
             "problem1" : problem1.getLucasNumber,
             "problem2a" : problem2a.getLucasNumber,
@@ -26,8 +26,25 @@ $(document).ready(function(){
                 let answer = lucasSeriesImplementation[problemName](i, startTime, userInput.maxTime);
                 // Determine how long it took to calculate this index 
                 let outputRunTime = (Date.now() - outputStartTime)/1000; 
-                // Write out normal output
-                output = `lucas ${i} is ${answer[0]} - computed with ${answer[1]} ${answer[1] == 1 ? " call " : " calls "} in ${outputRunTime} seconds`;
+                
+                // Get the lucas number, then convert it 
+                //      into a string in the format "#######"
+                let lucasNumber = answer[0].toLocaleString("fullwide", {useGrouping: false});
+                // Get the number of calls that the function had to make
+                let numberOfCalls = answer[1];
+                // 
+                let sizeOfLucasNumberInBaseTen = lucasNumber.length;
+
+                if(sizeOfLucasNumberInBaseTen < 50){
+                    // Write out normal output
+                    output = `lucas ${i} is ${lucasNumber} - computed with ${numberOfCalls} ${numberOfCalls == 1 ? " call " : " calls "} in ${outputRunTime} seconds`;
+                }
+                else{
+                    // Write out abridged output because the normal
+                    //      would be too long to be easily readable.
+                    output = `lucas ${i} contains ${sizeOfLucasNumberInBaseTen} digits - computed in ${outputRunTime} seconds`;
+                }
+                // Write the output string to the page
                 presenter.writeOutput(problemName, output);
             }
             catch (error) {
