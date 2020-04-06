@@ -24,8 +24,8 @@ var presenter = {
         return result;
     },
 
-    setUserInput : function(problemName, index, maxTime, startIndex){
-        // Get user input from form data
+    setUserInput : function(problemName, startIndex, index, maxTime){
+        // Set user input from form data
         $("#" + problemName + "-index").val(index);
         $("#" + problemName + "-maxTime").val(maxTime);
         $("#" + problemName + "-startIndex").val(startIndex);
