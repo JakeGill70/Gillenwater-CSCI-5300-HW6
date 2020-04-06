@@ -18,12 +18,15 @@ $(document).ready(function(){
         // Set the official starting time of the method
         let startTime = Date.now(); 
 
+        // Print a faux function call
+        writeOutput(problemName, `${problemName}(${index}, ${startTime}, ${userInput.maxTime})`);
+
         let output = "";
         for (let i = userInput.startIndex; i <= userInput.index; i++) {
             try {
                 // Set the start time of this index's run
                 let outputStartTime = Date.now(); 
-                // Get the runtime 
+                // Get the appropriate answer from the specified implementation
                 let answer = lucasSeriesImplementation[problemName](i, startTime, userInput.maxTime);
                 // Determine how long it took to calculate this index 
                 let outputRunTime = (Date.now() - outputStartTime)/1000; 
