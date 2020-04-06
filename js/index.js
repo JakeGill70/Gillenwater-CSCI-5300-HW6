@@ -28,23 +28,37 @@ $(document).ready(function(){
                 // Determine how long it took to calculate this index 
                 let outputRunTime = (Date.now() - outputStartTime)/1000; 
 
+                // Get the lucas number
+                let lucasNumber = answer[0];
+
                 // Check if the lucas number exceeded the maximum value
                 //      of a 64-bit floating point number
-                if(answer[0] == Infinity){
+                if(lucasNumber == Infinity){
                     throw(`64-bit floating point overflow at lucas number ${i}`);
                 }
                 
                 // Get the lucas number, then convert it 
                 //      into a string in the format "#######"
-                let lucasNumber = answer[0].toLocaleString("fullwide", {useGrouping: false});
+                let formattedLucasNumber = answer[0].toLocaleString("fullwide", {useGrouping: false});
                 // Get the number of calls that the function had to make
                 let numberOfCalls = answer[1];
                 // Get how many characters it would take to display the lucas number in base 10
-                let sizeOfLucasNumberInBaseTen = lucasNumber.length;
+                //      Note that this only includes characters prior to a decimal point.
+                //      Therefore, errors introduced by floating point math do not count.
+                let sizeOfLucasNumberInBaseTen = formattedLucasNumber.split(".")[0].length
+
+                // If the lucas number is not a whole number, which can be caused 
+                //      by rounding errors in floating point math, round it to 
+                //      the nearest whole number.
+                // Note: This check occurs after the sizeOfLucasNumberInBaseTen has
+                //      been determined because it alters formattedLucasNumber.
+                if(lucasNumber % 1 != 0){
+                    formattedLucasNumber = formattedLucasNumber + ` -- i.e., ${Math.round(lucasNumber).toLocaleString("fullwide", {useGrouping: false})} -- `;
+                }
 
                 if(sizeOfLucasNumberInBaseTen < 50){
                     // Write out normal output
-                    output = `lucas ${i} is ${lucasNumber} - computed with ${numberOfCalls} ${numberOfCalls == 1 ? " call " : " calls "} in ${outputRunTime} seconds`;
+                    output = `lucas ${i} is ${formattedLucasNumber} - computed with ${numberOfCalls} ${numberOfCalls == 1 ? " call " : " calls "} in ${outputRunTime} seconds`;
                 }
                 else{
                     // Write out abridged output because the normal
