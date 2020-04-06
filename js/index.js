@@ -26,13 +26,19 @@ $(document).ready(function(){
                 let answer = lucasSeriesImplementation[problemName](i, startTime, userInput.maxTime);
                 // Determine how long it took to calculate this index 
                 let outputRunTime = (Date.now() - outputStartTime)/1000; 
+
+                // Check if the lucas number exceeded the maximum value
+                //      of a 64-bit floating point number
+                if(answer[0] == Infinity){
+                    throw(`64-bit floating point overflow at lucas number ${i}`);
+                }
                 
                 // Get the lucas number, then convert it 
                 //      into a string in the format "#######"
                 let lucasNumber = answer[0].toLocaleString("fullwide", {useGrouping: false});
                 // Get the number of calls that the function had to make
                 let numberOfCalls = answer[1];
-                // 
+                // Get how many characters it would take to display the lucas number in base 10
                 let sizeOfLucasNumberInBaseTen = lucasNumber.length;
 
                 if(sizeOfLucasNumberInBaseTen < 50){
