@@ -35,24 +35,23 @@ var problem5 = {
             valueAtIndex = 1;
         }
         else {
-            let prevNumber = 1; // Initialized as to the value at index 1
-            let prevPrevNumber = 2; // Initialized to the value at index 0
+            // Determine the value via formula
+            //      Source: https://en.wikipedia.org/wiki/Lucas_number
 
-            // Start at i=2 because i=0 and i=1 is handled by the two previous if-statements
-            for (let i = 2; i <= index; i++) {
-                // Set the current value at the index as the sume of the two previous numbers
-                valueAtIndex =  prevNumber + prevPrevNumber;
-                // "Shift" the previous values for the next iteration
-                prevPrevNumber = prevNumber;
-                prevNumber = valueAtIndex;
-            }
-    
+            // Determine the square root of 5
+            let sqrtOfFive = Math.sqrt(5);
+            // Determine the golden ratio
+            let phi = (1 + sqrtOfFive) / 2;
+            // Determine one minus the golden ratio
+            let coPhi = (1 - sqrtOfFive) / 2;
+            // Determine the lucas number
+            valueAtIndex = Math.pow(phi, index) + Math.pow(coPhi, index);
         }
 
         // Not used in this implementation
         // But kept so that the same generic driver function
         // will continue to work the same
-        let numberOfTimesCalled = 1; 
+        let numberOfTimesCalled = 1;
 
         return [valueAtIndex, numberOfTimesCalled];
     }
