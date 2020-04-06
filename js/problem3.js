@@ -22,7 +22,7 @@ var problem3 = {
     },
 
     // Recursive determines the number at the specied index within the lucas series
-    // The method actual described by problem 2b
+    // The method actual described by problem 3
     _getLucasNumber : function(index){
 
         // ctx -> The current context in which this function is being called in.
