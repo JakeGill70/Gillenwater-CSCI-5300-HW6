@@ -12,7 +12,7 @@ var presenter = {
         if(startIndex == undefined){
             startIndex = "0";
         }
-        
+
         // Package data
         let result = {};
         result.index = parseInt(index);
@@ -23,6 +23,9 @@ var presenter = {
     },
 
     writeOutput : function(problemName, output){
+        // Mirror the output to the console
+        console.log(output);
+        
         // Wrap the output in the appropriate HTML tags
         output = this.wrapTextInListItem(output);
 
