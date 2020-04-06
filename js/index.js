@@ -19,7 +19,9 @@ $(document).ready(function(){
         let startTime = Date.now(); 
 
         // Print a faux function call
-        presenter.writeOutput(problemName, `${problemName}(${userInput.index}, ${startTime}, ${userInput.maxTime})`);
+        presenter.writeOutput(problemName, 
+            `${problemName}(${userInput.startIndex}, ${userInput.index}, ${startTime}, ${userInput.maxTime});` +
+            `<i style="color:grey">// This is a faux function call</i>`);
 
         let output = "";
         for (let i = userInput.startIndex; i <= userInput.index; i++) {
