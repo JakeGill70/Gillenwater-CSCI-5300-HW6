@@ -56,6 +56,12 @@ var problem3 = {
                 valueBeforeIndex = null;
             }
             else {
+                // clu = Computed Lucas Number
+                // I normally try to avoid naming like this, but I couldn't
+                //      think of a better name, and it looked too visually
+                //      similar to the computeLucasNumber() function at
+                //      a glance. Therefore, I decided that "clu" was
+                //      the next best option.
                 let clu = computeLucasNumber(ctx, i-1); // Get the previous number in the lucas series
                 valueAtIndex = clu[0] + clu[1]; // Determine the value at this index
                 valueBeforeIndex = clu[0]; // Set the value at the of the previous index
