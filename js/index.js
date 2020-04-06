@@ -19,7 +19,7 @@ $(document).ready(function(){
         let startTime = Date.now(); 
 
         // Print a faux function call
-        writeOutput(problemName, `${problemName}(${index}, ${startTime}, ${userInput.maxTime})`);
+        presenter.writeOutput(problemName, `${problemName}(${userInput.index}, ${startTime}, ${userInput.maxTime})`);
 
         let output = "";
         for (let i = userInput.startIndex; i <= userInput.index; i++) {
