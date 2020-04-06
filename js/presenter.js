@@ -40,7 +40,8 @@ var presenter = {
         }
 
         // Mirror the output to the console
-        console.log(output);
+        let consoleOutput = output.replace(/<[^>]+>/g, "") // Remove any incidental HTML tags
+        console.log(consoleOutput);
 
         // Wrap the output in the appropriate HTML tags
         output = this.wrapTextInListItem(output);
