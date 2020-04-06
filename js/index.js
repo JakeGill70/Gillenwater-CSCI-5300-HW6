@@ -1,5 +1,20 @@
 $(document).ready(function(){
 
+    function testProblemDriver(problemName){
+        // Using setTimeout() briefly takes control away from my 
+        //      script and back to the browser. This has the
+        //      effect of re-rendering the page between test
+        //      so that a user is less likely to think that 
+        //      the page has frozen.
+        setTimeout(function(){
+            presenter.outputRoute = "allTest";
+            problemDriver(problemName);
+            presenter.outputRoute = null;
+        }, 5);
+    }
+
+    // Ideally, this would be an asynchronous function
+    //      to keep the page from locking up during execution
     function problemDriver(problemName){
 
         // Dispatch table for the different problems/implementations 
@@ -88,6 +103,7 @@ $(document).ready(function(){
         }
     }
 
+    // Declare hooks between the index.html's buttons and JS actions
     $("#problem1-calculate").click(function(){
         problemDriver("problem1");
     });
@@ -110,6 +126,49 @@ $(document).ready(function(){
 
     $("#problem5-calculate").click(function(){
         problemDriver("problem5");
+    });
+
+    // Special hook that effectively hooks all other buttons
+    $("#allTest-calculate").click(function(){
+
+        // Maximum amount of time to spend on any one function 
+        const MAX_RUN_TIME = 7;
+        
+        // Problem 1 test
+        presenter.setUserInput("problem1", 0, 38, MAX_RUN_TIME);
+        testProblemDriver("problem1");
+
+        // Problem 2a test
+        presenter.setUserInput("problem2a", 0, 38, MAX_RUN_TIME);
+        testProblemDriver("problem2a");
+
+        // Problem 2b test
+        presenter.setUserInput("problem2b", 0, 38, MAX_RUN_TIME);
+        testProblemDriver("problem2b");
+
+        // Problem 3 test
+        //  0 to 20
+        presenter.setUserInput("problem3", 0, 20, MAX_RUN_TIME);
+        testProblemDriver("problem3");
+        //  992 to 999
+        presenter.setUserInput("problem3", 992, 999, MAX_RUN_TIME);
+        testProblemDriver("problem3");
+
+        // Problem 4 test
+        //  0 to 20
+        presenter.setUserInput("problem4", 0, 20, MAX_RUN_TIME);
+        testProblemDriver("problem4");
+        //  990 to 1500
+        presenter.setUserInput("problem4", 990, 1500, MAX_RUN_TIME);
+        testProblemDriver("problem4");
+
+        // Problem 5 test
+        //  0 to 20
+        presenter.setUserInput("problem5", 0, 20, MAX_RUN_TIME);
+        testProblemDriver("problem5");
+        //  990 to 1500
+        presenter.setUserInput("problem5", 990, 1500, MAX_RUN_TIME);
+        testProblemDriver("problem5");
     });
     
 });
