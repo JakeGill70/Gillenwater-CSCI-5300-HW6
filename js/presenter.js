@@ -1,4 +1,6 @@
 var presenter = {
+    outputRoute : null,
+
     getUserInput : function(problemName){
         // Get user input from form data
         let index = $("#" + problemName + "-index").val();
@@ -30,9 +32,16 @@ var presenter = {
     },
 
     writeOutput : function(problemName, output){
+
+        // If outputRoute is set
+        if(this.outputRoute){
+            // Change the problem name to be the outputRoute instead.
+            problemName = this.outputRoute;
+        }
+
         // Mirror the output to the console
         console.log(output);
-        
+
         // Wrap the output in the appropriate HTML tags
         output = this.wrapTextInListItem(output);
 
